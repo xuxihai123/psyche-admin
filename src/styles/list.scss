@@ -1,0 +1,29 @@
+.filters {
+  display: flex;
+  line-height: 38px;
+  height: 38px;
+  //   padding: 10px 20px;
+  .el-form-item {
+    height: 36px;
+    line-height: 36px;
+  }
+}
+
+.list-container {
+  position: relative;
+  .list-header {
+    padding: 10px 20px;
+  }
+  .list-body {
+    display: block;
+    position: relative;
+    padding: 20px 0;
+    // width: 80%;
+    // box-sizing: content-box;
+  }
+  .list-footer {
+    text-align: right;
+    height: 50px;
+    height: 50px;
+  }
+}
