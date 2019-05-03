@@ -2,7 +2,7 @@
   <div class="main-layout">
     <nav-menu class="left-box" :data="data" index-key="name" @handleSelect="handleSelect"/>
     <div class="right-box">
-      <nav-bar class="toolbar"/>
+      <nav-bar class="nav-box"/>
       <div class="view-wraper">
         <router-view class="view-box"></router-view>
         <nav-footer class="footer-box"></nav-footer>
@@ -79,15 +79,32 @@ export default class Home extends Vue {
   }
   .right-box {
     display: table-cell;
+    position: relative;
     width: 100%;
     // height: 100%;
+    .nav-box {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
     .view-wraper {
+      padding-top: 60px;
+      padding-bottom: 60px;
       .view-box {
+        // padding-bottom: 60px;
+        min-height: 500px;
         margin: 15px 20px;
         background-color: #fff;
         border: none;
         border-radius: 5px;
         box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
+      }
+      .footer-box {
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        width: 100%;
       }
     }
   }

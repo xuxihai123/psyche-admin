@@ -1,6 +1,6 @@
 <template>
   <div class="post-container">
-    <post-update-form></post-update-form>
+    <post-update-form type="page"></post-update-form>
   </div>
 </template>
 
@@ -11,5 +11,5 @@ import PostUpdateForm from '@/components/post/edit.vue';
 @Component({
   components: {PostUpdateForm},
 })
-export default class PostUpdate extends Vue {}
+export default class PageUpdate extends Vue {}
 </script>

@@ -8,17 +8,37 @@ const routes: any = [
   {
     path: '/post/new',
     name: 'postsAdd',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/post/add.vue'),
+    component: () => import('@/views/post/add.vue'),
   },
   {
     path: '/post/edit',
-    name: 'postsAdd',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/post/edit.vue'),
+    name: 'postsEdit',
+    component: () => import('@/views/post/edit.vue'),
   },
   {
     path: '/post/list',
     name: 'postsList',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/post/list.vue'),
+    component: () => import('@/views/post/list.vue'),
+  },
+  {
+    path: '/page/new',
+    name: 'pagesAdd',
+    component: () => import('@/views/page/add.vue'),
+  },
+  {
+    path: '/page/edit',
+    name: 'pagesEdit',
+    component: () => import('@/views/page/edit.vue'),
+  },
+  {
+    path: '/page/list',
+    name: 'pagesList',
+    component: () => import('@/views/page/list.vue'),
+  },
+  {
+    path: '/usr/bin/bash',
+    name: 'systemBash',
+    component: () => import('@/views/system/bash.vue'),
   },
 ];
 
@@ -38,7 +58,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '@/views/Login.vue'),
+      component: () => import('@/views/Login.vue'),
     },
   ],
 });

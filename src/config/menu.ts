@@ -39,4 +39,19 @@ export default [
     name: 'tags',
     icon: 'el-icon-collection-tag',
   },
+  {
+    title: '系统',
+    name: 'system',
+    icon: 'el-icon-s-platform',
+    children: [
+      {
+        title: '终端',
+        name: 'systemBash',
+      },
+      {
+        title: '信息',
+        name: 'systemInfo',
+      },
+    ],
+  },
 ];

@@ -1,19 +1,15 @@
 <template>
-  <div>create post</div>
+  <div class="post-container">
+    <post-add-form type="page"></post-add-form>
+  </div>
 </template>
 
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
-@Component
-export default class NavBar extends Vue {}
+import PostAddForm from '@/components/post/add.vue';
+@Component({
+  components: {PostAddForm},
+})
+export default class PageCreate extends Vue {}
 </script>
-
-<style lang="scss" scoped>
-.toolbar {
-  height: 60px;
-  background-color: white;
-  border-bottom: 1px solid lightgray;
-}
-</style>
-

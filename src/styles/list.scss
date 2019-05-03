@@ -12,18 +12,23 @@
 .list-container {
   position: relative;
   .list-header {
-    padding: 10px 20px;
+    padding: 15px 20px;
+    width: 95%;
   }
   .list-body {
     display: block;
     position: relative;
-    padding: 20px 0;
-    // width: 80%;
+    width: 95%;
+    margin: 0 auto;
     // box-sizing: content-box;
   }
   .list-footer {
     text-align: right;
-    height: 50px;
-    height: 50px;
+    padding: 15px 0;
+    width: 95%;
+    margin: 0 auto;
+    .el-pagination {
+      height: 32px;
+    }
   }
 }
