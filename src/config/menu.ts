@@ -2,7 +2,7 @@ export default [
   {
     title: '首页',
     name: 'home',
-    icon: 'el-icon-s-home',
+    icon: 'fa fa-tachometer lg',
   },
   {
     title: '文章',
@@ -37,7 +37,7 @@ export default [
   {
     title: '标签',
     name: 'tags',
-    icon: 'el-icon-collection-tag',
+    icon: 'fa fa-tags fa-lg',
   },
   {
     title: '系统',
@@ -51,6 +51,21 @@ export default [
       {
         title: '信息',
         name: 'systemInfo',
+      },
+    ],
+  },
+  {
+    title: '设置',
+    name: 'setting',
+    icon: 'fa fa-wrench fa-lg',
+    children: [
+      {
+        title: '博客',
+        name: 'settingBlog',
+      },
+      {
+        title: '邮件',
+        name: 'settingMail',
       },
     ],
   },

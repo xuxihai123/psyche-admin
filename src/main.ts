@@ -4,7 +4,6 @@ import router from './router/index';
 import store from './store/index';
 import './registerServiceWorker';
 import 'normalize.css/normalize.css';
-import 'socicon/css/socicon.css';
 import vClickOutside from 'v-click-outside';
 
 import Element from 'element-ui';

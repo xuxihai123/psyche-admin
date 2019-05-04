@@ -3,20 +3,20 @@
     <div class="footer-left">
       <a href="https://github.com/xuxihai123" target="_blank">@x373241884y</a>
       <a href="https://www.facebook.com/xuxihai123" target="_blank">
-        <i class="socicon socicon-facebook"></i>
+        <i class="fa fa-facebook"></i>
       </a>
       <a href="https://twitter.com/xuxihai123" target="_blank">
-        <i class="socicon socicon-twitter"></i>
+        <i class="fa fa-twitter"></i>
       </a>
       <a href="mailto:xuxihai123@gmail.com">
-        <i class="socicon socicon-google"></i>
+        <i class="fa fa-google"></i>
       </a>
       <a href="https://github.com/xuxihai123" target="_blank">
-        <i class="socicon socicon-github"></i>
+        <i class="fa fa-github" aria-hidden="true"></i>
       </a>
     </div>
     <div class="footer-right">
-      <span>©</span>
+      <span><i class="fa fa-copyright" aria-hidden="true"></i></span>
       <a href="https://github.com/xuxihai123/psyche" target="_blank">psyche</a>2019 Copyright.
       <span class="version">version: v1.0.0</span>
     </div>
@@ -50,6 +50,9 @@ export default class NavBar extends Vue {}
         transition: all 0.1s ease;
         color: #fff;
         padding: 6px;
+        width: 16px;
+        height: 16px;
+        text-align: center;
         box-sizing: content-box;
         font-size: 16px;
         &:hover {
@@ -71,16 +74,16 @@ export default class NavBar extends Vue {}
       padding-right: 10px;
     }
   }
-  .socicon-facebook {
+  .fa-facebook {
     background-color: #3b5998;
   }
-  .socicon-twitter {
+  .fa-twitter {
     background-color: #55acee;
   }
-  .socicon-google {
+  .fa-google {
     background-color: #dd4b39;
   }
-  .socicon-github {
+  .fa-github {
     background-color: #6b6b6b;
   }
 }

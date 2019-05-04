@@ -1,7 +1,7 @@
 <template>
-  <div class="main-layout">
-    <nav-menu class="left-box" :data="data" index-key="name" @handleSelect="handleSelect"/>
-    <div class="right-box">
+  <div class="app-wraper">
+    <nav-menu class="slider-container" :data="data" index-key="name" @handleSelect="handleSelect"/>
+    <div class="main-container">
       <nav-bar class="nav-box"/>
       <div class="view-wraper">
         <router-view class="view-box"></router-view>
@@ -13,9 +13,9 @@
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
-import NavBar from '@/components/NavBar.vue';
-import NavMenu from '@/components/NavMenu.vue';
-import NavFooter from '@/components/NavFooter.vue';
+import NavBar from './NavBar.vue';
+import NavMenu from './NavMenu.vue';
+import NavFooter from './NavFooter.vue';
 import fullMenu from '@/config/menu';
 @Component({
   components: {
@@ -64,46 +64,42 @@ export default class Home extends Vue {
 //     }
 //   }
 // }
-.main-layout {
-  // position: relative;
+.app-wraper {
+  position: relative;
   height: 100%;
   width: 100%;
-  display: table;
-  .left-box {
-    text-align: left;
-    display: table-cell;
-    width: 250px;
-    li {
-      width: 250px;
-    }
+  .slider-container {
+    transition: width 0.28s;
+    width: 210px !important;
+    // width: 64px !important;
+    background-color: #304156;
+    height: 100%;
+    position: fixed;
+    font-size: 0px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
+    overflow: hidden;
   }
-  .right-box {
-    display: table-cell;
+  .main-container {
+    min-height: 100%;
+    transition: margin-left 0.28s;
+    margin-left: 210px;
     position: relative;
-    width: 100%;
-    // height: 100%;
-    .nav-box {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
     .view-wraper {
-      padding-top: 60px;
       padding-bottom: 60px;
       .view-box {
-        // padding-bottom: 60px;
-        min-height: 500px;
         margin: 15px 20px;
-        background-color: #fff;
-        border: none;
-        border-radius: 5px;
-        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
+        box-shadow: 0 5px 5px 2px rgba(0, 0, 0, 0.25);
+        background-color: white;
+        min-height: 500px;
+        // padding-bottom: 60px;
       }
       .footer-box {
         position: absolute;
-        bottom: 0px;
-        left: 0;
+        bottom: 0;
+        right: 0;
         width: 100%;
       }
     }

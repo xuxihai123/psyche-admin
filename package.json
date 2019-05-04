@@ -18,7 +18,6 @@
     "mockjs": "^1.0.1-beta3",
     "normalize.css": "^8.0.1",
     "register-service-worker": "^1.6.2",
-    "socicon": "^3.0.5",
     "v-click-outside": "^2.1.1",
     "vue": "^2.6.10",
     "vue-class-component": "^7.0.2",

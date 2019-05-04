@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '@/views/Home.vue';
+import Layout from '@/layout/index.vue';
 
 Vue.use(Router);
 
@@ -36,9 +36,14 @@ const routes: any = [
     component: () => import('@/views/page/list.vue'),
   },
   {
-    path: '/usr/bin/bash',
+    path: '/system/bash',
     name: 'systemBash',
     component: () => import('@/views/system/bash.vue'),
+  },
+  {
+    path: '/setting/mail',
+    name: 'settingMail',
+    component: () => import('@/views/setting/mail.vue'),
   },
 ];
 
@@ -49,7 +54,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
+      component: Layout,
       children: routes,
     },
     {
