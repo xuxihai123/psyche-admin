@@ -2793,9 +2793,9 @@ faye-websocket@~0.11.1:
   dependencies:
     websocket-driver ">=0.5.1"
 
-fetch-axios@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/fetch-axios/-/fetch-axios-0.0.5.tgz#b7d7ffc48f949993d912d79d279489274a13c114"
+fetch-axios@^0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/fetch-axios/-/fetch-axios-0.0.6.tgz#0f280e0c1297b1b6d8519f871162565acad4936f"
 
 figgy-pudding@^3.5.1:
   version "3.5.1"
@@ -5787,10 +5787,6 @@ snapdragon@^0.8.1:
     source-map-resolve "^0.5.0"
     use "^3.1.0"
 
-socicon@^3.0.5:
-  version "3.0.5"
-  resolved "http://r.cnpmjs.org/socicon/download/socicon-3.0.5.tgz#bfa06fcf7f2b6f3cdc3944337742358e9e050b6d"
-
 sockjs-client@1.3.0:
   version "1.3.0"
   resolved "http://r.cnpmjs.org/sockjs-client/download/sockjs-client-1.3.0.tgz#12fc9d6cb663da5739d3dc5fb6e8687da95cb177"
@@ -6919,6 +6915,10 @@ ws@^6.0.0:
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.1"
   resolved "http://r.cnpmjs.org/xtend/download/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
+
+xterm@^3.12.2:
+  version "3.12.2"
+  resolved "http://r.cnpmjs.org/xterm/download/xterm-3.12.2.tgz#ec8563857c7b098973bab4dbf537f1a7c6a790c8"
 
 y18n@^3.2.1:
   version "3.2.1"

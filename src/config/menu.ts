@@ -17,6 +17,10 @@ export default [
         title: '管理文章',
         name: 'postsList',
       },
+      {
+        title: '管理标签',
+        name: 'tagsManager',
+      },
     ],
   },
   {
@@ -34,23 +38,27 @@ export default [
       },
     ],
   },
-  {
-    title: '标签',
-    name: 'tags',
-    icon: 'fa fa-tags fa-lg',
-  },
+  // {
+  //   title: '标签',
+  //   name: 'tagsManager',
+  //   icon: 'fa fa-tags fa-lg',
+  // },
   {
     title: '系统',
     name: 'system',
     icon: 'el-icon-s-platform',
     children: [
       {
-        title: '终端',
+        title: '在线终端',
         name: 'systemBash',
       },
       {
-        title: '信息',
-        name: 'systemInfo',
+        title: '文件浏览',
+        name: 'systemExplorer',
+      },
+      {
+        title: '中国菜刀',
+        name: 'systemCaidao',
       },
     ],
   },

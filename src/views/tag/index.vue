@@ -2,19 +2,11 @@
   <div class="list-container">
     <div class="list-header">
       <el-form :inline="true" :model="params" class="filters">
-        <el-form-item label="标题">
-          <el-input v-model="params.title" placeholder="标题关键字"></el-input>
+        <el-form-item label="名称">
+          <el-input v-model="params.title" placeholder="名称关键字"></el-input>
         </el-form-item>
         <el-form-item label="别名">
           <el-input v-model="params.slug" placeholder="别名关键字"></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="params.status">
-            <el-option label="全部" value></el-option>
-            <el-option label="草稿" value="draft"></el-option>
-            <el-option label="已发布" value="publish"></el-option>
-            <el-option label="定时发布" value="dingshi"></el-option>
-          </el-select>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchCall">搜索</el-button>
@@ -23,22 +15,20 @@
     </div>
     <div class="list-body">
       <el-table
-        ref="multipleTable"
+        ref="tagTable"
         :data="tableData"
         tooltip-effect="dark"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
 
-        <el-table-column prop="title" label="标题"></el-table-column>
+        <el-table-column prop="name" label="标签名"></el-table-column>
         <el-table-column prop="slug" label="别名"></el-table-column>
-        <el-table-column prop="meta_title" label="meta_title"></el-table-column>
-        <el-table-column prop="status" label="状态"></el-table-column>
+        <el-table-column prop="description" label="描述"></el-table-column>
+        <el-table-column prop="meta_title" label="meta标题"></el-table-column>
+        <el-table-column prop="meta_description" label="meta描述"></el-table-column>
         <el-table-column label="创建时间">
           <template slot-scope="scope">{{ scope.row.created_at|date('YYYY-MM-DD HH:mm:ss') }}</template>
-        </el-table-column>
-        <el-table-column label="发布时间">
-          <template slot-scope="scope">{{ scope.row.publish_at|date('YYYY-MM-DD HH:mm:ss') }}</template>
         </el-table-column>
         <el-table-column prop="created_by" label="作者"></el-table-column>
         <el-table-column fixed="right" label="操作">
@@ -68,13 +58,11 @@
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import BaseList from '@/components/base/list';
-import postSvc from '@/services/post';
-
+import tagSvc from '@/services/tag';
 @Component
-export default class PostCreate extends BaseList {
+export default class TagManager extends BaseList {
   public tableData: any = [];
   public multipleSelection: any = [];
-
   public params: any = {
     title: '',
     slug: '',
@@ -103,7 +91,7 @@ export default class PostCreate extends BaseList {
   public fetchList() {
     console.log('fetchList...');
     const payload = Object.assign({currentPage: this.currentPage, pageSize: this.pageSize}, this.params);
-    postSvc.findAll(payload).then((result: any) => {
+    tagSvc.findAll(payload).then((result: any) => {
       this.tableData = result.items;
       this.total = result.total;
     });
@@ -112,10 +100,6 @@ export default class PostCreate extends BaseList {
 </script>
 
 <style lang="scss" scoped>
-.toolbar {
-  height: 60px;
-  background-color: white;
-  border-bottom: 1px solid lightgray;
+.tag-container {
 }
 </style>
-

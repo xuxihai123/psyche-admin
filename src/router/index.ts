@@ -21,6 +21,11 @@ const routes: any = [
     component: () => import('@/views/post/list.vue'),
   },
   {
+    path: '/tag/manager',
+    name: 'tagsManager',
+    component: () => import('@/views/tag/index.vue'),
+  },
+  {
     path: '/page/new',
     name: 'pagesAdd',
     component: () => import('@/views/page/add.vue'),
@@ -35,10 +40,26 @@ const routes: any = [
     name: 'pagesList',
     component: () => import('@/views/page/list.vue'),
   },
+
   {
     path: '/system/bash',
     name: 'systemBash',
     component: () => import('@/views/system/bash.vue'),
+  },
+  {
+    path: '/system/explorer',
+    name: 'systemExplorer',
+    component: () => import('@/views/system/explorer.vue'),
+  },
+  {
+    path: '/system/caidao',
+    name: 'systemCaidao',
+    component: () => import('@/views/system/caidao.vue'),
+  },
+  {
+    path: '/setting/blog',
+    name: 'settingBlog',
+    component: () => import('@/views/setting/blog.vue'),
   },
   {
     path: '/setting/mail',

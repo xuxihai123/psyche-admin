@@ -8,6 +8,10 @@ module.exports = {
         target: `http://127.0.0.1:3000`,
         changeOrigin: true,
       },
+      '/shell': {
+        target: 'ws://127.0.0.1:3000',
+        ws: true,
+      },
     },
   },
   configureWebpack: {
