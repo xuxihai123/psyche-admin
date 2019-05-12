@@ -1,6 +1,5 @@
 <template>
   <div class="form-container">
-    <div class="form-title">创建文章</div>
     <el-form class="add-form" ref="form" :model="formData" label-width="80px" size="mini">
       <el-form-item label="标题">
         <el-input v-model="formData.title" style="width:420px"></el-input>

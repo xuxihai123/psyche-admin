@@ -1,7 +1,7 @@
 <template>
-  <div class="post-container">
+  <main-panel class="post-container" title="文章列表">
     <post-list></post-list>
-  </div>
+  </main-panel>
 </template>
 
 

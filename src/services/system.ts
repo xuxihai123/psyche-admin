@@ -5,29 +5,36 @@ const config = {
   },
 };
 
-function parseData(data: string, parent: string) {
-  let result = data.replace(/^->\|/, '').replace(/\|<-$/, '');
-  return result.split('\n').map(transformLine);
+function cleanStartEnd(str: string) {
+  return str.replace(/^->\|/, '').replace(/\|<-$/, '');
+}
 
-  function transformLine(filestr: string) {
-    // bin/	2019-5-1 10:35:33	0	-
-    const parts = filestr.split('\t');
-    return {
-      filename: parts[0],
-      mtime: parts[1],
-      size: parts[2],
-      isDirectory: parts[0].endsWith('/'),
-      parent: parent,
-    };
-  }
+function parseFileline(fileline: string) {
+  // bin/	2019-5-1 10:35:33	0	-
+  const parts = fileline.split('\t');
+  return {
+    filename: parts[0],
+    mtime: parts[1],
+    size: parts[2],
+    attr: parts[3],
+    isDirectory: parts[0].endsWith('/'),
+  };
 }
 
 export default {
-  readDir(query: any): Promise<any> {
-    query.action = 'readdict';
-    query.z1 = query.path;
-    return api.get('/caidao', {query, config}).then((result: any) => {
-      return parseData(result, query.path);
+  readDir(payload: any): Promise<any> {
+    payload.action = 'readdict';
+    payload.z1 = payload.path;
+    payload.z = '1';
+    return api.post('/caidao', {payload, config}).then((result: any) => {
+      result = cleanStartEnd(result);
+      return result.split('\n').map(parseFileline);
+    });
+  },
+  readCurrentDir(): Promise<any> {
+    const payload = {action: 'index', z: '1'};
+    return api.post('/caidao', {payload, config}).then((result: any) => {
+      return cleanStartEnd(result).trim();
     });
   },
 };

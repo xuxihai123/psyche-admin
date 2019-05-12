@@ -1,7 +1,7 @@
 <template>
-  <div class="post-container">
+  <main-panel class="post-container">
     <post-list type="page"></post-list>
-  </div>
+  </main-panel>
 </template>
 
 

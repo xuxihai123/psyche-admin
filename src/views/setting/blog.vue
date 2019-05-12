@@ -1,6 +1,5 @@
 <template>
-  <div class="email-container">
-    <div class="form-title">博客设置</div>
+  <main-panel class="email-container" title="博客设置">
     <el-form ref="form" :model="formData" label-width="80px">
       <el-form-item label="标题">
         <el-input v-model="formData.username"></el-input>
@@ -19,7 +18,7 @@
         <el-button>取消</el-button>
       </el-form-item>
     </el-form>
-  </div>
+  </main-panel>
 </template>
 
 

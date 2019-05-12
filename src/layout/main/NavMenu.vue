@@ -94,6 +94,7 @@ export default class NavMenu extends Vue {
 <style lang="scss">
 .scrollbar-wrapper {
   height: 100%;
+  margin-bottom: 0;
   overflow-x: hidden !important;
   .el-menu-item i,
   .el-submenu__title i {
@@ -107,6 +108,7 @@ export default class NavMenu extends Vue {
   .el-menu {
     border: none;
     height: 100%;
+    margin-bottom: 15px;
     width: 100% !important;
     // li:hover {
     //   position: relative;

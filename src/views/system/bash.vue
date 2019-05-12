@@ -1,7 +1,7 @@
 <template>
-  <div class="bash-container">
+  <main-panel class="bash-container" title="终端">
     <div id="terminal"></div>
-  </div>
+  </main-panel>
 </template>
 
 
@@ -30,10 +30,15 @@ export default class BashShell extends Vue {
     xterm.winptyCompatInit();
     // This kinda makes sense
     const container = document.getElementById('terminal');
-    term.open(container as any);
-    ws.getSocket().then((socket) => {
-      xterm.attach(socket);
-    });
+    xterm.open(container as any);
+    ws.getSocket()
+      .then((socket) => {
+        xterm.attach(socket);
+      })
+      .catch((err) => {
+        console.log(err);
+        xterm.write('websocket open failed!!!');
+      });
   }
 
   private destroyed() {

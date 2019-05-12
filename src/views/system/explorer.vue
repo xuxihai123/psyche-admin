@@ -1,11 +1,9 @@
 <template>
-  <div class="explorer-container">文件浏览</div>
+  <main-panel class="explorer-container">文件浏览</main-panel>
 </template>
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 @Component
-export default class FileExplorer extends Vue {
-    
-}
+export default class FileExplorer extends Vue {}
 </script>

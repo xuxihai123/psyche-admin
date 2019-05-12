@@ -1,0 +1,70 @@
+.cai-dao {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid lightblue;
+
+  .file-tree {
+    flex: 0 0 350px;
+    border-right: 1px solid lightblue;
+    .el-tree {
+      height: 600px;
+      overflow: scroll;
+    }
+  }
+  .file-list {
+    flex: 1 0 0;
+    position: relative;
+    width: 100%;
+    .list-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .open-status {
+    display: block;
+    font-size: 12px;
+    color: #606266;
+    transition: color 0.15s linear;
+    transform: none;
+    &:before {
+      content: '\e6d9';
+    }
+  }
+  .expanded {
+    &:before {
+      content: '\e6d8';
+    }
+  }
+
+  .el-table--small td,
+  .el-table--small th {
+    padding: 2px 0;
+  }
+}
+
+.caidao-input {
+  display: flex;
+  justify-content: space-between;
+}

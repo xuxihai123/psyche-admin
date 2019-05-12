@@ -1,60 +1,149 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Layout from '@/layout/index.vue';
+import {MainLayout, LoginLayout} from '@/layout/index';
 
 Vue.use(Router);
 
+const buildCrumb = (list: any) => {
+  return {
+    breadcrumb: list,
+  };
+};
+
 const routes: any = [
+  {
+    path: '',
+    redirect: '/home',
+  },
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/views/home/index.vue'),
+  },
   {
     path: '/post/new',
     name: 'postsAdd',
+    meta: buildCrumb([
+      {
+        name: '管理文章',
+      },
+      {
+        name: '添加文章',
+      },
+    ]),
     component: () => import('@/views/post/add.vue'),
   },
   {
     path: '/post/edit',
     name: 'postsEdit',
+    meta: buildCrumb([
+      {
+        name: '管理文章',
+      },
+      {
+        name: '编辑文章',
+      },
+    ]),
     component: () => import('@/views/post/edit.vue'),
   },
   {
     path: '/post/list',
     name: 'postsList',
+    meta: buildCrumb([
+      {
+        name: '管理文章',
+      },
+    ]),
     component: () => import('@/views/post/list.vue'),
   },
   {
     path: '/tag/manager',
     name: 'tagsManager',
+    meta: buildCrumb([
+      {
+        name: '管理文章',
+      },
+      {
+        name: '标签管理',
+      },
+    ]),
     component: () => import('@/views/tag/index.vue'),
   },
   {
     path: '/page/new',
     name: 'pagesAdd',
+    meta: buildCrumb([
+      {
+        name: '管理页面',
+      },
+      {
+        name: '创建页面',
+      },
+    ]),
     component: () => import('@/views/page/add.vue'),
   },
   {
     path: '/page/edit',
     name: 'pagesEdit',
+    meta: buildCrumb([
+      {
+        name: '管理页面',
+      },
+      {
+        name: '编辑页面',
+      },
+    ]),
     component: () => import('@/views/page/edit.vue'),
   },
   {
     path: '/page/list',
     name: 'pagesList',
+    meta: buildCrumb([
+      {
+        name: '管理页面',
+      },
+    ]),
     component: () => import('@/views/page/list.vue'),
   },
 
   {
     path: '/system/bash',
     name: 'systemBash',
+    meta: buildCrumb([
+      {
+        name: '系统',
+      },
+      {
+        name: '终端',
+      },
+    ]),
     component: () => import('@/views/system/bash.vue'),
   },
   {
     path: '/system/explorer',
     name: 'systemExplorer',
+    meta: buildCrumb([
+      {
+        name: '系统',
+      },
+      {
+        name: '文件浏览',
+      },
+    ]),
     component: () => import('@/views/system/explorer.vue'),
   },
   {
     path: '/system/caidao',
     name: 'systemCaidao',
-    component: () => import('@/views/system/caidao.vue'),
+    meta: buildCrumb([
+      {
+        name: '系统',
+      },
+      {
+        name: '菜刀',
+      },
+    ]),
+    component: () => import('@/views/system/caidao/index.vue'),
   },
   {
     path: '/setting/blog',
@@ -74,17 +163,30 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: Layout,
+      name: 'main',
+      component: MainLayout,
       children: routes,
     },
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('@/views/Login.vue'),
+      component: LoginLayout,
+      children: [
+        {
+          path: '',
+          redirect: '/login/step1',
+        },
+        {
+          path: '/login/step1',
+          name: 'loginStep1',
+          component: () => import('@/views/login/step1.vue'),
+        },
+        {
+          path: '/login/step2',
+          name: 'loginStep2',
+          component: () => import('@/views/login/step2.vue'),
+        },
+      ],
     },
   ],
 });

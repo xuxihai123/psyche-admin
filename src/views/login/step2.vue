@@ -7,21 +7,23 @@
     label-width="0px"
     class="demo-ruleForm login-container"
   >
-    <h3 class="title">系统登录</h3>
-    <el-form-item prop="account">
-      <el-input type="text" v-model="formData.username" auto-complete="off" placeholder="账号"></el-input>
+    <h3 class="title">口令认证</h3>
+    <el-form-item prop="token">
+      <el-input
+        type="password"
+        prefix-icon="el-icon-lock"
+        v-model="formData.token"
+        auto-complete="off"
+        placeholder="口令"
+      ></el-input>
     </el-form-item>
-    <el-form-item prop="checkPass">
-      <el-input type="password" v-model="formData.password" auto-complete="off" placeholder="密码"></el-input>
-    </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
     <el-form-item style="width:100%;">
       <el-button
         type="primary"
         style="width:100%;"
         @click.native.prevent="loginSys"
         :loading="logining"
-      >登录</el-button>
+      >确定</el-button>
       <!--<el-button @click.native.prevent="handleReset2">重置</el-button>-->
     </el-form-item>
   </el-form>
@@ -31,27 +33,27 @@
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
-import axios from 'axios';
+import userSvc from '@/services/user';
 @Component
-export default class Login extends Vue {
+export default class LoginStep2 extends Vue {
   private formData: any = {
-    username: 'admin',
-    password: 'admin',
+    token: '123456',
   };
   private checked: boolean = false;
   private logining: boolean = false;
   private rules: any = {};
 
-  private loginSys() {
+  private async loginSys() {
     // console.log('login...');
-    axios
-      .post('/api/v1/login', {
-        username: this.formData.username,
-        password: this.formData.password,
-      })
-      .then((result) => {
-        console.log(result);
-      });
+    try {
+      this.logining = true;
+      await userSvc.auth({token: this.formData.token});
+      this.$router.push('/');
+    } catch (err) {
+      console.log(err);
+    } finally {
+      this.logining = false;
+    }
   }
 }
 </script>

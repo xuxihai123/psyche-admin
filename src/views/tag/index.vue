@@ -1,5 +1,5 @@
 <template>
-  <div class="list-container">
+  <main-panel class="list-container" title="管理标签">
     <div class="list-header">
       <el-form :inline="true" :model="params" class="filters">
         <el-form-item label="名称">
@@ -10,6 +10,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchCall">搜索</el-button>
+          <el-button type="primary" @click="addTag">添加</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -51,17 +52,26 @@
         @current-change="handleCurrentChange"
       ></el-pagination>
     </div>
-  </div>
+    <transition name="slide-fade">
+      <tag-save v-if="showTagPanel" @close="showTagPanel=false" class="tag-panel"></tag-save>
+    </transition>
+  </main-panel>
 </template>
 
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import BaseList from '@/components/base/list';
+import TagSave from '@/components/tag/save.vue';
 import tagSvc from '@/services/tag';
-@Component
+@Component({
+  components: {
+    TagSave,
+  },
+})
 export default class TagManager extends BaseList {
   public tableData: any = [];
+  public showTagPanel: boolean = false;
   public multipleSelection: any = [];
   public params: any = {
     title: '',
@@ -96,10 +106,17 @@ export default class TagManager extends BaseList {
       this.total = result.total;
     });
   }
+
+  public addTag() {
+    this.showTagPanel = true;
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.tag-container {
+.tag-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>

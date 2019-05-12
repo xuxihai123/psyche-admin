@@ -1,9 +1,8 @@
 <template>
-  <div :class="{'show':show}" class="header-search">
+  <div :class="{'show':show}" class="header-search" v-click-outside="clickOut">
     <span class="search-icon">
       <i class="fa fa-search fa-lg" @click.stop="click"></i>
     </span>
-
     <el-select
       ref="headerSearchSelect"
       v-model="search"
@@ -21,6 +20,9 @@
         :value="item"
         :label="item.title.join(' > ')"
       />
+      <slot name="prefix">
+        <i class="fa fa-search fa-lg" @click.stop="click"></i>
+      </slot>
     </el-select>
   </div>
 </template>
@@ -37,21 +39,32 @@ export default class HeaderSearch extends Vue {
   private show: boolean = false;
   private fuse: boolean = false;
 
-  private click() {}
-  private close() {}
-  private change(val: string) {}
-  private initFuse(list: any[]) {}
-  private querySearch(query: string) {}
+  private click() {
+    this.show = true;
+  }
+  private clickOut() {
+    this.show = false;
+  }
+  private change(val: string) {
+    console.log(123);
+  }
+  private initFuse(list: any[]) {
+    console.log(123);
+  }
+  private querySearch(query: string) {
+    console.log('querySearch');
+  }
 }
 </script>
 
 <style lang="scss">
 .header-search {
   font-size: 0 !important;
-
+  display: flex;
   .search-icon {
     cursor: pointer;
-    font-size: 18px;
+    font-size: 16px;
+    color: #ccc;
     vertical-align: middle;
   }
 

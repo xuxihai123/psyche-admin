@@ -1,7 +1,7 @@
 <template>
-  <div class="post-container">
+  <main-panel class="post-container">
     <post-add-form type="page"></post-add-form>
-  </div>
+  </main-panel>
 </template>
 
 

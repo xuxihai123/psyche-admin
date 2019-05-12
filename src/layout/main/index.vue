@@ -1,6 +1,12 @@
 <template>
   <div class="app-wraper">
-    <nav-menu class="slider-container" :data="data" index-key="name" @handleSelect="handleSelect"/>
+    <nav-menu
+      class="slider-container"
+      :defaultActive="$route.name"
+      :data="data"
+      index-key="name"
+      @handleSelect="handleSelect"
+    />
     <div class="main-container">
       <nav-bar class="nav-box"/>
       <div class="view-wraper">
@@ -34,7 +40,7 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss">
-// .main-layout {
+// .main-panel {
 //   display: flex;
 //   justify-content: space-between;
 //   // position: relative;

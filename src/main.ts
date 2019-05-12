@@ -5,6 +5,7 @@ import store from './store/index';
 import './registerServiceWorker';
 import 'normalize.css/normalize.css';
 import vClickOutside from 'v-click-outside';
+import MainPanel from '@/layout/main/MainPanel.vue';
 
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -15,6 +16,8 @@ import './styles/index.scss';
 import './filters/index';
 
 Vue.config.productionTip = false;
+
+Vue.component('main-panel', MainPanel);
 Vue.use(vClickOutside);
 Vue.use(mavonEditor);
 Vue.use(Element, {

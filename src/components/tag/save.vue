@@ -1,7 +1,7 @@
 <template>
   <div class="more-setting" v-click-outside="closeModal">
     <el-form ref="form" :model="formData" label-position="top" label-width="80px">
-      <h5 class="setting-title">发布设置</h5>
+      <h5 class="setting-title">标签设置</h5>
       <div class="image-setting">
         <el-upload
           class="avatar-uploader"
@@ -15,26 +15,25 @@
             <img :src="imageUrl" class="avatar">
           </template>
           <template v-else>
-            <el-button>Upload post image</el-button>
+            <el-button>Upload tag image</el-button>
             <i class="el-icon-camera-solid"></i>
           </template>
         </el-upload>
       </div>
-      <el-form-item label="Post URL">
+      <el-form-item label="Name">
+        <el-input v-model="formData.name"></el-input>
+      </el-form-item>
+      <el-form-item label="URL">
         <el-input v-model="formData.slug"></el-input>
       </el-form-item>
-      <el-form-item label="Publish Date">
-        <el-date-picker v-model="formData.abb" align="right" type="datetime" placeholder="选择日期时间"></el-date-picker>
+      <el-form-item label="Description">
+        <el-input :rows="3" type="textarea" v-model="formData.description"></el-input>
       </el-form-item>
-      <el-form-item label="Tags">
-        <el-select v-model="formData.type">
-          <el-option value="js"></el-option>
-          <el-option value="css"></el-option>
-          <el-option value="html"></el-option>
-        </el-select>
+      <el-form-item label="Meta title">
+        <el-input v-model="formData.meta_title"></el-input>
       </el-form-item>
-      <el-form-item label="Excerpt">
-        <el-input :rows="3" type="textarea" v-model="formData.excerpt"></el-input>
+      <el-form-item label="Meta Description">
+        <el-input :rows="3" type="textarea" v-model="formData.meta_description"></el-input>
       </el-form-item>
       <div class="btns">
         <el-button type="primary" @click="onSubmit">保存</el-button>
