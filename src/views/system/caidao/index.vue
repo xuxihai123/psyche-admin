@@ -20,7 +20,13 @@
       <div class="file-list">
         <div class="list-content">
           <el-table :data="filelist" height="600">
-            <el-table-column prop="filename" label="文件" fixed></el-table-column>
+            <el-table-column prop="filename" label="文件" fixed>
+              <template slot-scope="scope">
+                <i class="fa fa-folder" aria-hidden="true" v-if="scope.row.isDirectory"></i>
+                <i class="fa fa-file-text" aria-hidden="true" v-if="!scope.row.isDirectory"></i>
+                <span class="filename">{{scope.row.filename}}</span>
+              </template>
+            </el-table-column>
             <el-table-column prop="mtime" label="时间" width="150" fixed></el-table-column>
             <el-table-column prop="size" label="大小" width="100" fixed></el-table-column>
             <el-table-column prop="attr" label="属性" width="100" fixed></el-table-column>
@@ -67,8 +73,8 @@ export default class CaiDao extends Vue {
   }
   private clickNode(node: any, vnode: any, instance: any) {
     console.log(node);
-    console.log(vnode);
-    console.log(instance);
+    // console.log(vnode);
+    // console.log(instance);
     this.resolveNode(node, vnode);
   }
   private buildTree(folderName: string) {

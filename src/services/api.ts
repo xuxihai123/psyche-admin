@@ -1,6 +1,8 @@
 import fetchApi, {FaxiosRequest} from 'fetch-axios';
 import {FaxiosResponse} from 'fetch-axios';
 import errors from '@/common/errors';
+import errorCodes from '@/config/errorCodes';
+
 fetchApi.config({
   baseUrl: '/api/v1',
   timeout: 5000,
@@ -31,9 +33,11 @@ fetchApi.addResponseInterceptor((res: FaxiosResponse<any>) => {
       return;
     }
     if (data && data.status !== 'ok') {
+      console.log(errorCodes.business[data.code] || data.message);
       throw new errors.BuessinessError(data.code, data.message);
     }
   } else {
+    console.log(errorCodes.network[res.status] || res.statusText);
     throw new errors.NetworkError(res.status, res.statusText);
   }
 });

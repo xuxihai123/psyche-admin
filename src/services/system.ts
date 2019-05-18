@@ -37,4 +37,9 @@ export default {
       return cleanStartEnd(result).trim();
     });
   },
+  explorer(payload: any): Promise<any> {
+    return api.post('/explorer', {payload}).then((result: any) => {
+      return result;
+    });
+  },
 };

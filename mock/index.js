@@ -1,6 +1,7 @@
 import Post from './posts';
 import Tag from './tags';
 import User from './users';
+import System from './system';
 
 export default {
   'POST /api/v1/login': User.login,
@@ -19,4 +20,7 @@ export default {
   'DELETE /api/v1/tags/:id': Tag.updateTag,
   'GET /api/v1/tags/:id': Tag.getTag,
   'GET /api/v1/tags': Tag.findTags,
+  // system
+  'POST /api/v1/caidao': System.caidao,
+  'POST /api/v1/explorer': System.explorer,
 };
