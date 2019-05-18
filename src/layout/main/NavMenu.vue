@@ -69,8 +69,8 @@ export default class NavMenu extends Vue {
   };
 
   public generateIndex(item: any, index: number) {
-    console.log(item);
-    console.log(item[this._indexKey]);
+    // console.log(item);
+    // console.log(item[this._indexKey]);
     return item[this._indexKey];
   }
   public handleSelect(indexStr: string) {
