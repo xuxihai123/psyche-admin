@@ -14,11 +14,11 @@ export default [
         name: 'postsAdd',
       },
       {
-        title: '管理文章',
+        title: '文章管理',
         name: 'postsList',
       },
       {
-        title: '管理标签',
+        title: '标签管理',
         name: 'tagsManager',
       },
     ],
@@ -68,11 +68,31 @@ export default [
     icon: 'fa fa-wrench fa-lg',
     children: [
       {
-        title: '博客',
+        title: '基本设置',
+        name: 'ttsManager',
+      },
+      {
+        title: '皮肤管理',
+        name: 'ttsManager',
+      },
+      {
+        title: '分类管理',
+        name: 'ttsManager',
+      },
+      {
+        title: '导航管理',
+        name: 'navManager',
+      },
+      {
+        title: '链接管理',
         name: 'settingBlog',
       },
       {
-        title: '邮件',
+        title: '用户管理',
+        name: 'settingBlog',
+      },
+      {
+        title: '邮件设置',
         name: 'settingMail',
       },
     ],

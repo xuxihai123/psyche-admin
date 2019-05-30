@@ -21,6 +21,6 @@ export default {
   'GET /api/v1/tags/:id': Tag.getTag,
   'GET /api/v1/tags': Tag.findTags,
   // system
-  'POST /api/v1/caidao': System.caidao,
-  'POST /api/v1/explorer': System.explorer,
+  // 'POST /api/v1/caidao': System.caidao,
+  // 'POST /api/v1/explorer': System.explorer,
 };
