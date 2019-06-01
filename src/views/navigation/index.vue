@@ -1,12 +1,9 @@
 <template>
-  <main-panel class="list-container" title="管理标签">
+  <main-panel class="list-container" title="管理导航">
     <div class="list-header">
       <el-form :inline="true" :model="params" class="filters">
         <el-form-item label="名称">
-          <el-input v-model="params.title" placeholder="名称关键字"></el-input>
-        </el-form-item>
-        <el-form-item label="别名">
-          <el-input v-model="params.slug" placeholder="别名关键字"></el-input>
+          <el-input v-model="params.keyword" placeholder="名称关键字"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchCall">搜索</el-button>
@@ -22,16 +19,19 @@
         tooltip-effect="dark"
         @selection-change="handleSelectionChange"
       >
-        <el-table-column type="selection" width="55"></el-table-column>
-
-        <el-table-column prop="name" label="标签名"></el-table-column>
-        <el-table-column prop="slug" label="别名"></el-table-column>
-        <el-table-column prop="description" label="描述"></el-table-column>
-        <el-table-column prop="meta_title" label="meta标题"></el-table-column>
-        <el-table-column prop="meta_description" label="meta描述"></el-table-column>
-        <el-table-column label="创建时间">
-          <template slot-scope="scope">{{ scope.row.created_at|date('YYYY-MM-DD HH:mm:ss') }}</template>
+        <el-table-column label="排序" width="100" align="center">
+          <template slot-scope="scope">
+            <span class="order-btn" v-if="scope.$index!==0">
+              <i class="el-icon-upload2"></i>
+            </span>
+            <span class="order-btn" v-if="scope.$index!==tableData.length-1">
+              <i class="el-icon-download"></i>
+            </span>
+          </template>
         </el-table-column>
+        <el-table-column prop="name" label="导航名称"></el-table-column>
+        <el-table-column prop="link" label="导航链接"></el-table-column>
+        <el-table-column prop="icon" label="导航图标"></el-table-column>
         <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button type="text" size="small" @click="openPanel(scope.row)">编辑</el-button>
@@ -41,7 +41,7 @@
       </el-table>
     </div>
     <div class="list-footer">
-      <el-pagination
+      <!-- <el-pagination
         background
         :current-page="currentPage"
         :page-size="pageSize"
@@ -49,16 +49,16 @@
         :total="total"
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-      ></el-pagination>
+      ></el-pagination>-->
     </div>
     <transition name="slide-fade">
-      <tag-save
+      <nav-create-save
         v-if="showTagPanel"
-        :editObj="editObj"
+        @close="showTagPanel=false"
         @refreshList="fetchList"
-        @close="switchMoreSetting(false)"
+        :editObj="editObj"
         class="tag-panel"
-      ></tag-save>
+      ></nav-create-save>
     </transition>
   </main-panel>
 </template>
@@ -67,22 +67,22 @@
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import BaseList from '@/components/base/list';
-import TagSave from './save.vue';
-import services from '@/services';
+import NavCreateSave from './save.vue';
+import navigationSvc from '@/services/navigation';
+import {extend} from 'dayjs';
 @Component({
   components: {
-    TagSave,
+    NavCreateSave,
   },
 })
-export default class TagManager extends BaseList {
+export default class NavigationManager extends BaseList {
   public tableData: any = [];
+  public editObj: any = null;
   public showTagPanel: boolean = false;
   public multipleSelection: any = [];
-  public editObj: any = null;
   public loading: boolean = false;
   public params: any = {
-    title: '',
-    slug: '',
+    keyword: '',
   };
 
   public handleSelectionChange(val: any) {
@@ -97,37 +97,35 @@ export default class TagManager extends BaseList {
     console.log('fetchList...');
     try {
       this.loading = true;
-      const payload = Object.assign({currentPage: this.currentPage, pageSize: this.pageSize}, this.params);
-      const result = await services.tagService.findAll(payload);
+      const result = await navigationSvc.findAll(this.params);
       this.tableData = result.items;
-      this.total = result.total;
     } catch (err) {
       this.$message.error(err.message);
     } finally {
       this.loading = false;
     }
   }
+
   public openPanel(obj: any) {
     this.editObj = obj;
-    this.switchMoreSetting(true);
+    this.showTagPanel = true;
   }
 
   public deleteItem(obj: any) {
-    services.tagService.delete(obj.id).then(() => {
+    navigationSvc.delete(obj.id).then(() => {
       this.$message.success('删除成功！');
       this.fetchList();
     });
   }
-  private switchMoreSetting(flag: boolean) {
-    if (flag) {
-      this.$scope.app.activePanel = true;
-      this.showTagPanel = true;
-    } else {
-      setTimeout(() => {
-        this.$scope.app.activePanel = false;
-      }, 500);
-      this.showTagPanel = false;
-    }
-  }
 }
 </script>
+
+<style lang="scss" scoped>
+.order-btn {
+  display: inline-block;
+  padding-right: 6px;
+  color: #409eff;
+  font-size: 18px;
+  cursor: pointer;
+}
+</style>

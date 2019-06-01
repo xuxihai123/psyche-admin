@@ -1,51 +1,42 @@
 <template>
-  <div class="list-container">
+  <main-panel class="list-container" title="管理标签">
     <div class="list-header">
       <el-form :inline="true" :model="params" class="filters">
-        <el-form-item label="标题">
-          <el-input v-model="params.title" placeholder="标题关键字"></el-input>
+        <el-form-item label="名称">
+          <el-input v-model="params.title" placeholder="名称关键字"></el-input>
         </el-form-item>
         <el-form-item label="别名">
           <el-input v-model="params.slug" placeholder="别名关键字"></el-input>
         </el-form-item>
-        <el-form-item label="状态">
-          <el-select v-model="params.status">
-            <el-option label="全部" value></el-option>
-            <el-option label="草稿" value="draft"></el-option>
-            <el-option label="已发布" value="publish"></el-option>
-            <el-option label="定时发布" value="dingshi"></el-option>
-          </el-select>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchCall">搜索</el-button>
+          <el-button type="primary" @click="addTag">添加</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div class="list-body">
       <el-table
-        ref="multipleTable"
+        ref="tagTable"
         :data="tableData"
         tooltip-effect="dark"
         @selection-change="handleSelectionChange"
       >
         <el-table-column type="selection" width="55"></el-table-column>
 
-        <el-table-column prop="title" label="标题"></el-table-column>
+        <el-table-column prop="name" label="标签名"></el-table-column>
         <el-table-column prop="slug" label="别名"></el-table-column>
-        <el-table-column prop="meta_title" label="meta_title"></el-table-column>
-        <el-table-column prop="status" label="状态"></el-table-column>
+        <el-table-column prop="description" label="描述"></el-table-column>
+        <el-table-column prop="meta_title" label="meta标题"></el-table-column>
+        <el-table-column prop="meta_description" label="meta描述"></el-table-column>
         <el-table-column label="创建时间">
           <template slot-scope="scope">{{ scope.row.created_at|date('YYYY-MM-DD HH:mm:ss') }}</template>
-        </el-table-column>
-        <el-table-column label="发布时间">
-          <template slot-scope="scope">{{ scope.row.publish_at|date('YYYY-MM-DD HH:mm:ss') }}</template>
         </el-table-column>
         <el-table-column prop="created_by" label="作者"></el-table-column>
         <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
-            <el-button type="text" size="small" @click="preview(scope.row)">查看</el-button>
-            <el-button type="text" size="small" @click="toEdit(scope.row)">编辑</el-button>
-            <el-button type="text" size="small" @click="deleteItem(scope.row)">删除</el-button>
+            <el-button type="text" size="small">查看</el-button>
+            <el-button type="text" size="small">编辑</el-button>
+            <el-button type="text" size="small">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -61,20 +52,27 @@
         @current-change="handleCurrentChange"
       ></el-pagination>
     </div>
-  </div>
+    <transition name="slide-fade">
+      <tag-save v-if="showTagPanel" @close="showTagPanel=false" class="tag-panel"></tag-save>
+    </transition>
+  </main-panel>
 </template>
 
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import BaseList from '@/components/base/list';
-import postSvc from '@/services/post';
-
-@Component
-export default class PostCreate extends BaseList {
+import TagSave from '@/components/tag/save.vue';
+import tagSvc from '@/services/tag';
+@Component({
+  components: {
+    TagSave,
+  },
+})
+export default class TagManager extends BaseList {
   public tableData: any = [];
+  public showTagPanel: boolean = false;
   public multipleSelection: any = [];
-
   public params: any = {
     title: '',
     slug: '',
@@ -103,29 +101,22 @@ export default class PostCreate extends BaseList {
   public fetchList() {
     console.log('fetchList...');
     const payload = Object.assign({currentPage: this.currentPage, pageSize: this.pageSize}, this.params);
-    postSvc.findAll(payload).then((result: any) => {
+    tagSvc.findAll(payload).then((result: any) => {
       this.tableData = result.items;
       this.total = result.total;
     });
   }
 
-  public preview(item: any) {
-    window.open('http://localhost:3000/post?pid=' + item.id);
-  }
-
-  public deleteItem(item: any) {}
-
-  public toEdit(item: any) {
-    this.$router.push({name: 'postsEdit', query: {pid: item.id}});
+  public addTag() {
+    this.showTagPanel = true;
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.toolbar {
-  height: 60px;
-  background-color: white;
-  border-bottom: 1px solid lightgray;
+.tag-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 </style>
-

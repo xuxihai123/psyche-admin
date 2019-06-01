@@ -19,6 +19,7 @@ export default class MainPanel extends Vue {
 
 <style lang="scss">
 .main-panel {
+  position: relative;
   .main-title {
     font-size: 16px;
     font-weight: 700;

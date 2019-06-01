@@ -1,5 +1,5 @@
 <template>
-  <div class="app-wraper">
+  <div class="app-wraper" :class="activePanel?'active-panel':''">
     <nav-menu
       class="slider-container"
       :defaultActive="$route.name"
@@ -33,6 +33,9 @@ import fullMenu from '@/config/menu';
 export default class Home extends Vue {
   private data: any[] = fullMenu;
 
+  private get activePanel() {
+    return this.$scope.app.activePanel;
+  }
   private handleSelect(selectKey: string) {
     this.$router.push({name: selectKey});
   }
@@ -110,5 +113,9 @@ export default class Home extends Vue {
       }
     }
   }
+}
+
+.active-panel {
+  overflow: hidden;
 }
 </style>

@@ -155,6 +155,16 @@ const routes: any = [
     name: 'settingMail',
     component: () => import('@/views/setting/mail.vue'),
   },
+  {
+    path: '/setting/navigation',
+    name: 'settingNavigation',
+    component: () => import('@/views/navigation/index.vue'),
+  },
+  {
+    path: '/setting/user',
+    name: 'userManager',
+    component: () => import('@/views/user/index.vue'),
+  },
 ];
 
 export default new Router({

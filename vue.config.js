@@ -12,6 +12,9 @@ module.exports = {
         target: 'ws://127.0.0.1:3000',
         ws: true,
       },
+      '/upload': {
+        target: 'ws://127.0.0.1:3000',
+      },
     },
   },
   configureWebpack: {

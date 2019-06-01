@@ -1,10 +1,11 @@
 import Vue from 'vue';
-import Vuex from 'vuex';
 
-Vue.use(Vuex);
+const state = {
+  app: {
+    activePanel: false,
+  },
+};
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {},
-});
+const scope = new Vue({data: state});
+
+export default scope;

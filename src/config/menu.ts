@@ -21,6 +21,14 @@ export default [
         title: '标签管理',
         name: 'tagsManager',
       },
+      {
+        title: '分类管理',
+        name: 'ttsManager',
+      },
+      {
+        title: '草稿列表',
+        name: 'ttsManager',
+      },
     ],
   },
   {
@@ -75,13 +83,10 @@ export default [
         title: '皮肤管理',
         name: 'ttsManager',
       },
-      {
-        title: '分类管理',
-        name: 'ttsManager',
-      },
+
       {
         title: '导航管理',
-        name: 'navManager',
+        name: 'settingNavigation',
       },
       {
         title: '链接管理',
@@ -89,7 +94,7 @@ export default [
       },
       {
         title: '用户管理',
-        name: 'settingBlog',
+        name: 'userManager',
       },
       {
         title: '邮件设置',

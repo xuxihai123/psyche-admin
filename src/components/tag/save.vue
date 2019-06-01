@@ -2,24 +2,6 @@
   <div class="more-setting" v-click-outside="closeModal">
     <el-form ref="form" :model="formData" label-position="top" label-width="80px">
       <h5 class="setting-title">标签设置</h5>
-      <div class="image-setting">
-        <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload"
-        >
-          <template v-if="imageUrl">
-            <i class="el-icon-delete-solid" @click.stop="removeImage"></i>
-            <img :src="imageUrl" class="avatar">
-          </template>
-          <template v-else>
-            <el-button>Upload tag image</el-button>
-            <i class="el-icon-camera-solid"></i>
-          </template>
-        </el-upload>
-      </div>
       <el-form-item label="Name">
         <el-input v-model="formData.name"></el-input>
       </el-form-item>

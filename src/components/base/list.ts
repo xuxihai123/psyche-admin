@@ -4,7 +4,7 @@ import {Vue, Component, Prop} from 'vue-property-decorator';
 export default class BaseList extends Vue {
   public total: number = 1;
   public currentPage: number = 1;
-  public pageSize: number = 1;
+  public pageSize: number = 10;
   public params: any = {};
 
   public fetchList() {

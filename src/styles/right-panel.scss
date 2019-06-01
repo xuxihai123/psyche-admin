@@ -1,0 +1,66 @@
+.more-setting {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 0 15px;
+  // margin-bottom: 15px;
+  width: 300px;
+  z-index: 2000;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: #f4f8fb;
+  border-radius: 3px;
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
+  .avatar-uploader {
+    line-height: 140px;
+    height: 140px;
+    text-align: center;
+    margin: 0 auto;
+    background-color: white;
+    position: relative;
+    .el-icon-camera-solid {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+    }
+    .el-icon-delete-solid {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 4px;
+      box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.2);
+      color: #fff;
+      padding: 5px;
+      //   z-index: 2001;
+    }
+    .el-upload {
+      height: 140px;
+      width: 287px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+  .setting-title {
+    font-size: 14px;
+    padding: 10px 0;
+  }
+  .el-select,
+  .el-input {
+    width: 100%;
+  }
+  .el-form-item {
+    margin-bottom: 0;
+  }
+  .el-form-item__label {
+    padding: 0px;
+  }
+  .btns {
+    text-align: right;
+    line-height: 36px;
+    padding: 10px 0px;
+  }
+}

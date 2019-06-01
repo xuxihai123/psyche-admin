@@ -5,14 +5,15 @@
       <div class="image-setting">
         <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          name="image"
+          action="/api/v1/upload/single"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload"
         >
-          <template v-if="imageUrl">
+          <template v-if="formData.imageUrl">
             <i class="el-icon-delete-solid" @click.stop="removeImage"></i>
-            <img :src="imageUrl" class="avatar">
+            <img :src="formData.imageUrl" class="avatar">
           </template>
           <template v-else>
             <el-button>Upload post image</el-button>
@@ -24,17 +25,28 @@
         <el-input v-model="formData.slug"></el-input>
       </el-form-item>
       <el-form-item label="Publish Date">
-        <el-date-picker v-model="formData.abb" align="right" type="datetime" placeholder="选择日期时间"></el-date-picker>
+        <el-date-picker
+          v-model="formData.publish_date"
+          align="right"
+          type="datetime"
+          placeholder="选择日期时间"
+        ></el-date-picker>
       </el-form-item>
       <el-form-item label="Tags">
-        <el-select v-model="formData.type">
-          <el-option value="js"></el-option>
-          <el-option value="css"></el-option>
-          <el-option value="html"></el-option>
+        <el-select
+          v-model="formData.tagIds"
+          :multiple="true"
+          :loading="tagLoading"
+          :filterable="true"
+        >
+          <el-option v-for="item in tagsList" :key="item.id" :label="item.name" :value="item.id"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="Excerpt">
-        <el-input :rows="3" type="textarea" v-model="formData.excerpt"></el-input>
+      <el-form-item label="Meta">
+        <el-input :rows="3" type="text" v-model="formData.meta_title"></el-input>
+      </el-form-item>
+      <el-form-item label="Meta Description">
+        <el-input :rows="3" type="textarea" v-model="formData.meta_description"></el-input>
       </el-form-item>
       <div class="btns">
         <el-button type="primary" @click="onSubmit">保存</el-button>
@@ -47,25 +59,49 @@
 
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
+import services from '@/services';
 @Component
 export default class MoreSetting extends Vue {
+  @Prop()
+  private setting: any;
+
   private formData: any = {
-    name: '',
     slug: '',
-    region: '',
-    date1: '',
-    date2: '',
-    delivery: false,
-    type: [],
-    resource: '',
-    desc: '',
+    tagIds: [],
+    meta_title: '',
+    meta_description: '',
+    publish_date: '',
+    imageUrl: '',
   };
-  private imageUrl: string = '';
-  private onSubmit() {
-    console.log('submit...');
+  private tagLoading: boolean = false;
+  private tagsList: any[] = [];
+  private mounted() {
+    this.loadTags();
+    if (this.setting) {
+      console.log(this.setting);
+      Object.assign(this.formData, this.setting);
+    }
   }
-  private handleAvatarSuccess() {
+  private onSubmit() {
+    const obj = Object.assign({}, this.formData);
+    obj.tags = this.formData.tagIds.map((id: number) => this.tagsList.find((tag) => tag.id === id));
+    console.log(obj);
+    this.$emit('change', obj);
+    this.$emit('close');
+  }
+  private async loadTags() {
+    try {
+      this.tagLoading = true;
+      const result: any = await services.tagService.findAll({pageSize: 1000});
+      this.tagsList = result.items || [];
+    } finally {
+      this.tagLoading = false;
+    }
+  }
+  private handleAvatarSuccess(result: any) {
+    console.log(result);
     console.log('handleAvatarSuccess...');
+    this.formData.imageUrl = result.data.originalname;
   }
   private beforeAvatarUpload(file: any) {
     // console.log(file);
@@ -75,80 +111,20 @@ export default class MoreSetting extends Vue {
   }
   private removeImage() {
     console.log('removeImage...');
-    this.imageUrl = '';
+    this.formData.imageUrl = '';
   }
-  private closeModal() {
-    this.$emit('close');
+  private closeModal(event: any) {
+    if (event.target && event.target.textContent === '更多设置') {
+    } else {
+      this.$emit('close');
+    }
   }
 }
 </script>
 
-<style lang="scss">
+
+<style lang="scss" scoped>
 .more-setting {
-  position: absolute;
-  right: 0;
-  top: 75px;
-  padding: 0 15px;
-  margin-bottom: 15px;
-  width: 300px;
-  z-index: 2000;
-  height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: #f4f8fb;
-  border-radius: 3px;
-  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.25);
-  .avatar-uploader {
-    line-height: 140px;
-    height: 140px;
-    text-align: center;
-    margin: 0 auto;
-    background-color: white;
-    position: relative;
-    .el-icon-camera-solid {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-    }
-    .el-icon-delete-solid {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background: rgba(0, 0, 0, 0.6);
-      border-radius: 4px;
-      box-shadow: 0 0 0 1px hsla(0, 0%, 100%, 0.2);
-      color: #fff;
-      padding: 5px;
-      //   z-index: 2001;
-    }
-    .el-upload {
-      height: 140px;
-      width: 287px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-  }
-  .setting-title{
-    font-size: 14px;
-    padding: 10px 0;
-  }
-  .el-select,
-  .el-input {
-    width: 100%;
-  }
-  .el-form-item {
-    margin-bottom: 0;
-  }
-  .el-form-item__label {
-    padding: 0px;
-  }
-  .btns {
-    text-align: right;
-    line-height: 36px;
-    padding: 10px 0px;
-  }
+  height: 800px;
 }
 </style>
-
