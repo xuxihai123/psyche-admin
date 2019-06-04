@@ -77,7 +77,7 @@ export default [
     children: [
       {
         title: '基本设置',
-        name: 'ttsManager',
+        name: 'baseSetting',
       },
       {
         title: '皮肤管理',

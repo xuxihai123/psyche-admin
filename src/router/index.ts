@@ -146,6 +146,11 @@ const routes: any = [
     component: () => import('@/views/system/caidao/index.vue'),
   },
   {
+    path: '/setting/base',
+    name: 'baseSetting',
+    component: () => import('@/views/setting/base.vue'),
+  },
+  {
     path: '/setting/blog',
     name: 'settingBlog',
     component: () => import('@/views/setting/blog.vue'),

@@ -63,6 +63,7 @@ export default class PostCreate extends Vue {
         tagIds: this.setting.tagIds,
       };
       await services.postService.create(payload);
+      this.$message.success('添加成功！');
     } catch (err) {
       this.$message.error(err.message);
     } finally {
