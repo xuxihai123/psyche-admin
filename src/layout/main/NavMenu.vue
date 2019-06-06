@@ -111,7 +111,7 @@ export default class NavMenu extends Vue {
   .el-menu {
     border: none;
     height: 100%;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
     width: 100% !important;
     // li:hover {
     //   position: relative;

@@ -24,7 +24,7 @@
       <el-form-item label="Post URL">
         <el-input v-model="formData.slug"></el-input>
       </el-form-item>
-      <el-form-item label="Publish Date">
+      <el-form-item label="Publish Date" v-if="type==='post'">
         <el-date-picker
           v-model="formData.publish_date"
           align="right"
@@ -32,7 +32,7 @@
           placeholder="选择日期时间"
         ></el-date-picker>
       </el-form-item>
-      <el-form-item label="Tags">
+      <el-form-item label="Tags" v-if="type==='post'">
         <el-select
           v-model="formData.tagIds"
           :multiple="true"
@@ -64,6 +64,8 @@ import services from '@/services';
 export default class MoreSetting extends Vue {
   @Prop()
   private setting: any;
+  @Prop({default: 'post'})
+  private type!: string;
 
   private formData: any = {
     slug: '',
@@ -80,6 +82,7 @@ export default class MoreSetting extends Vue {
     if (this.setting) {
       console.log(this.setting);
       Object.assign(this.formData, this.setting);
+      this.formData.tagIds = this.setting.tags.map((item: any) => item.id);
     }
   }
   private onSubmit() {

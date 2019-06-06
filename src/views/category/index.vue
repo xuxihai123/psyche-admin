@@ -5,18 +5,16 @@
         <el-form-item label="名称">
           <el-input v-model="params.title" placeholder="名称关键字"></el-input>
         </el-form-item>
-        <el-form-item label="别名">
-          <el-input v-model="params.slug" placeholder="别名关键字"></el-input>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="searchCall">搜索</el-button>
-          <el-button type="primary" @click="addTag">添加</el-button>
+          <el-button type="primary" @click="openPanel()">添加</el-button>
         </el-form-item>
       </el-form>
     </div>
     <div class="list-body">
       <el-table
         ref="tagTable"
+        v-loading="loading"
         :data="tableData"
         tooltip-effect="dark"
         @selection-change="handleSelectionChange"
@@ -26,17 +24,15 @@
         <el-table-column prop="name" label="标签名"></el-table-column>
         <el-table-column prop="slug" label="别名"></el-table-column>
         <el-table-column prop="description" label="描述"></el-table-column>
-        <el-table-column prop="meta_title" label="meta标题"></el-table-column>
-        <el-table-column prop="meta_description" label="meta描述"></el-table-column>
-        <el-table-column label="创建时间">
-          <template slot-scope="scope">{{ scope.row.created_at|date('YYYY-MM-DD HH:mm:ss') }}</template>
+        <el-table-column label="标签列表">
+          <template slot-scope="scope">
+            <span>{{scope.row.tags.map((tag)=>tag.name).join(', ')}}</span>
+          </template>
         </el-table-column>
-        <el-table-column prop="created_by" label="作者"></el-table-column>
         <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
-            <el-button type="text" size="small">查看</el-button>
-            <el-button type="text" size="small">编辑</el-button>
-            <el-button type="text" size="small">删除</el-button>
+            <el-button type="text" size="small" @click="openPanel(scope.row)">编辑</el-button>
+            <el-button type="text" size="small" @click="deleteItem(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -53,7 +49,13 @@
       ></el-pagination>
     </div>
     <transition name="slide-fade">
-      <tag-save v-if="showTagPanel" @close="showTagPanel=false" class="tag-panel"></tag-save>
+      <category-form
+        v-if="showTagPanel"
+        :editObj="editObj"
+        @refreshList="fetchList"
+        @close="switchMoreSetting(false)"
+        class="tag-panel"
+      ></category-form>
     </transition>
   </main-panel>
 </template>
@@ -62,33 +64,23 @@
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 import BaseList from '@/components/base/list';
-import TagSave from '@/components/tag/save.vue';
-import tagSvc from '@/services/tag';
+import CategoryForm from './form.vue';
+import categorySvc from '@/services/category';
 @Component({
   components: {
-    TagSave,
+    CategoryForm,
   },
 })
 export default class TagManager extends BaseList {
+  public editObj: any = null;
   public tableData: any = [];
+  public loading: boolean = false;
   public showTagPanel: boolean = false;
   public multipleSelection: any = [];
   public params: any = {
     title: '',
     slug: '',
-    status: '',
   };
-
-  public toggleSelection(rows: any) {
-    const pickTable = this.$refs.multipleTable as any;
-    if (rows) {
-      rows.forEach((row: any) => {
-        pickTable.toggleRowSelection(row);
-      });
-    } else {
-      pickTable.clearSelection();
-    }
-  }
 
   public handleSelectionChange(val: any) {
     this.multipleSelection = val;
@@ -98,17 +90,42 @@ export default class TagManager extends BaseList {
     this.fetchList();
   }
 
-  public fetchList() {
+  public async fetchList() {
     console.log('fetchList...');
-    const payload = Object.assign({currentPage: this.currentPage, pageSize: this.pageSize}, this.params);
-    tagSvc.findAll(payload).then((result: any) => {
+    try {
+      this.loading = true;
+      const payload = Object.assign({currentPage: this.currentPage, pageSize: this.pageSize}, this.params);
+      const result = await categorySvc.findAll(payload);
       this.tableData = result.items;
       this.total = result.total;
-    });
+    } catch (err) {
+      this.$message.error(err.message);
+    } finally {
+      this.loading = false;
+    }
   }
 
-  public addTag() {
-    this.showTagPanel = true;
+  public openPanel(obj: any) {
+    this.editObj = obj;
+    this.switchMoreSetting(true);
+  }
+
+  public deleteItem(obj: any) {
+    categorySvc.delete(obj.id).then(() => {
+      this.$message.success('删除成功！');
+      this.fetchList();
+    });
+  }
+  private switchMoreSetting(flag: boolean) {
+    if (flag) {
+      this.$scope.app.activePanel = true;
+      this.showTagPanel = true;
+    } else {
+      setTimeout(() => {
+        this.$scope.app.activePanel = false;
+      }, 500);
+      this.showTagPanel = false;
+    }
   }
 }
 </script>

@@ -13,13 +13,15 @@
         <el-button type="primary" @click="showMoreSet(true)">更多设置</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">保存</el-button>
-        <el-button type="primary" @click="onSubmit">发布</el-button>
+        <el-button type="primary" @click="publish(true)" v-if="type==='page'">确定</el-button>
+        <el-button type="primary" @click="publish(false)" v-if="type==='post'">保存</el-button>
+        <el-button type="primary" @click="publish(true)" v-if="type==='post'">发布</el-button>
         <el-button @click="showMoreSet(false)">取消</el-button>
       </el-form-item>
     </el-form>
     <transition name="slide-fade">
       <more-setting
+        :type="type"
         v-show="showSetting"
         class="fix-setting"
         @close="showMoreSet(false)"
@@ -40,6 +42,9 @@ import services from '@/services';
   },
 })
 export default class PostCreate extends Vue {
+  @Prop({default: 'post'})
+  private type!: string;
+
   private formData: any = {
     title: '',
     markdown: '',
@@ -48,10 +53,10 @@ export default class PostCreate extends Vue {
   private setting: any = {};
   private showSetting: boolean = false;
 
-  private async onSubmit() {
+  private async publish(flag: boolean) {
     try {
       console.log('onSubmit...');
-      const payload = {
+      const payload: any = {
         title: this.formData.title,
         markdown: this.formData.markdown,
         excerpt: this.formData.excerpt,
@@ -60,8 +65,10 @@ export default class PostCreate extends Vue {
         meta_description: this.setting.meta_description,
         publish_date: this.setting.publish_date,
         imageUrl: this.setting.imageUrl,
-        tagIds: this.setting.tagIds,
+        status: flag ? 'published' : 'draft',
+        postType: this.type,
       };
+      payload.tagIds = this.setting.tags.map((item: any) => item.id);
       await services.postService.create(payload);
       this.$message.success('添加成功！');
     } catch (err) {

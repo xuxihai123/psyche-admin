@@ -13,7 +13,7 @@
         <search></search>
       </div>
       <div class="tool-item">
-        <i class="fa fa-arrows-alt fa-lg" aria-hidden="true" @click="openFullscreen"></i>
+        <i class="fa fa-arrows-alt fa-lg" aria-hidden="true" @click="toggleFull"></i>
       </div>
       <div>
         <user-info></user-info>
@@ -28,6 +28,7 @@ import {Vue, Component, Prop} from 'vue-property-decorator';
 import Search from './Search.vue';
 import UserInfo from './UserInfo.vue';
 import NavLink from './NavLink.vue';
+
 @Component({
   components: {
     Search,
@@ -36,6 +37,23 @@ import NavLink from './NavLink.vue';
   },
 })
 export default class NavBar extends Vue {
+  public isFullScreen() {
+    const doc = document as any;
+    return !!(
+      doc.fullscreen ||
+      doc.mozFullScreen ||
+      doc.webkitIsFullScreen ||
+      doc.webkitFullScreen ||
+      doc.msFullScreen
+    );
+  }
+  public toggleFull() {
+    if (this.isFullScreen()) {
+      this.closeFullscreen();
+    } else {
+      this.openFullscreen();
+    }
+  }
   /* View in fullscreen */
   public openFullscreen() {
     const elem: any = document.documentElement;

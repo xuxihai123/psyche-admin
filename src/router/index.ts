@@ -70,6 +70,19 @@ const routes: any = [
     component: () => import('@/views/tag/index.vue'),
   },
   {
+    path: '/category/manager',
+    name: 'CategoryManager',
+    meta: buildCrumb([
+      {
+        name: '管理文章',
+      },
+      {
+        name: '分类管理',
+      },
+    ]),
+    component: () => import('@/views/category/index.vue'),
+  },
+  {
     path: '/page/new',
     name: 'pagesAdd',
     meta: buildCrumb([

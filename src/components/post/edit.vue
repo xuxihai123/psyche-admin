@@ -13,8 +13,9 @@
         <el-button type="primary" @click="showMoreSet(true)">更多设置</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">保存</el-button>
-        <el-button type="primary" @click="onSubmit">发布</el-button>
+        <el-button type="primary" @click="publish(true)" v-if="type==='page'">确定</el-button>
+        <el-button type="primary" @click="publish(false)" v-if="type==='post'">保存</el-button>
+        <el-button type="primary" @click="publish(true)" v-if="type==='post'">发布</el-button>
         <el-button @click="showMoreSet(false)">取消</el-button>
       </el-form-item>
     </el-form>
@@ -22,6 +23,7 @@
       <more-setting
         v-if="showSetting"
         :setting="setting"
+        :type="type"
         class="fix-setting"
         @close="showMoreSet(false)"
         @change="changeSetting"
@@ -42,6 +44,9 @@ import file from '../../services/file';
   },
 })
 export default class PostUpdate extends Vue {
+  @Prop({default: 'post'})
+  private type!: string;
+
   private updateObj: any = null;
   private formData: any = {
     title: '',
@@ -66,17 +71,17 @@ export default class PostUpdate extends Vue {
         meta_title: result.meta_title,
         meta_description: result.meta_description,
         imageUrl: result.image,
-        tagIds: result.tags,
+        tags: result.tags,
       };
     } catch (err) {
     } finally {
       this.loading = false;
     }
   }
-  private async onSubmit() {
+  private async publish(flag: boolean) {
     try {
       console.log('onSubmit...');
-      const payload = {
+      const payload: any = {
         id: this.updateObj.id,
         title: this.formData.title,
         markdown: this.formData.markdown,
@@ -86,8 +91,10 @@ export default class PostUpdate extends Vue {
         meta_description: this.setting.meta_description,
         publish_date: this.setting.publish_date,
         imageUrl: this.setting.imageUrl,
-        tagIds: this.setting.tagIds,
+        status: flag ? 'published' : 'draft',
+        postType: this.type,
       };
+      payload.tagIds = this.setting.tags.map((item: any) => item.id);
       await services.postService.update(payload);
       this.$message.success('更新成功！');
     } catch (err) {

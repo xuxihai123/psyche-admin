@@ -23,11 +23,7 @@ export default [
       },
       {
         title: '分类管理',
-        name: 'ttsManager',
-      },
-      {
-        title: '草稿列表',
-        name: 'ttsManager',
+        name: 'CategoryManager',
       },
     ],
   },
@@ -80,17 +76,13 @@ export default [
         name: 'baseSetting',
       },
       {
-        title: '皮肤管理',
-        name: 'ttsManager',
+        title: '皮肤设置',
+        name: 'skinsSetting',
       },
 
       {
         title: '导航管理',
         name: 'settingNavigation',
-      },
-      {
-        title: '链接管理',
-        name: 'settingBlog',
       },
       {
         title: '用户管理',
