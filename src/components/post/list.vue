@@ -117,6 +117,7 @@ export default class PostCreate extends BaseList {
     postSvc
       .delete(item.id)
       .then((result: any) => {
+        this.$message.success('删除成功！');
         this.fetchList();
       })
       .catch((err) => {

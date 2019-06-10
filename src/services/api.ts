@@ -1,44 +1,62 @@
-import fetchApi, {FaxiosRequest} from 'fetch-axios';
-import {FaxiosResponse} from 'fetch-axios';
+// import fetchApi, {FaxiosRequest} from 'fetch-axios';
+// import {FaxiosResponse} from 'fetch-axios';
 import errors from '@/common/errors';
 import errorCodes from '@/config/errorCodes';
+import axios, {AxiosResponse} from 'axios';
 
-fetchApi.config({
-  baseUrl: '/api/v1',
+const instance = axios.create({
+  baseURL: '/api/v1',
   timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
   },
-  transformResponse: (res: FaxiosResponse<any>) => {
-    const respData = res.data;
-    if (respData && respData.status === 'ok') {
-      return respData.data || res.data;
+});
+// Add a response interceptor
+instance.interceptors.response.use(
+  (response: any) => {
+    if (response.status >= 200 && response.status < 300) {
+      const data = response.data;
+      const contentType = response.headers['content-type'];
+      if (!/application\/json/.test(contentType)) {
+        return;
+      }
+      if (data && data.status !== 'ok') {
+        console.log(errorCodes.business[data.code] || data.message);
+        throw new errors.BuessinessError(data.code, data.message);
+      }
     } else {
-      return res.data;
+      console.log(errorCodes.network[response.status] || response.statusText);
+      throw new errors.NetworkError(response.status, response.statusText);
     }
+    // Do something with response data
+    return response;
   },
-  beforeRequest: (req: any) => {
-    req.start = Date.now();
+  (error: Error) => {
+    // Do something with response error
+    return Promise.reject(error);
   },
-  afterRequest: (req: any) => {
-    const time = Date.now() - req.start;
-    console.log(`[fetch-axios]: ${req.url} ${time}ms`);
-  },
-});
-fetchApi.addResponseInterceptor((res: FaxiosResponse<any>) => {
-  if (res.status >= 200 && res.status < 300) {
-    const data = res.data;
-    const contentType = res.headers['content-type'];
-    if (!/application\/json/.test(contentType)) {
-      return;
+);
+
+const api = ['get', 'post', 'put', 'delete'].reduce((prev: any, key: string) => {
+  prev[key] = (url: string, options: any) => {
+    options.method = key;
+    options.url = url;
+    if (key === 'post') {
+      options.params = options.payload;
+    } else {
+      options.params = options.query;
     }
-    if (data && data.status !== 'ok') {
-      console.log(errorCodes.business[data.code] || data.message);
-      throw new errors.BuessinessError(data.code, data.message);
-    }
-  } else {
-    console.log(errorCodes.network[res.status] || res.statusText);
-    throw new errors.NetworkError(res.status, res.statusText);
-  }
-});
-export default fetchApi;
+    const start = Date.now();
+    return (instance as any)(options).then((resp: AxiosResponse) => {
+      console.log(`[axios]: ${resp.config.url} ${Date.now() - start}ms`);
+      const respData = resp.data;
+      if (respData && respData.status === 'ok') {
+        return respData.data || resp.data;
+      } else {
+        return resp.data;
+      }
+    });
+  };
+  return prev;
+}, {});
+export default api;

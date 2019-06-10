@@ -13,7 +13,7 @@ export default {
   // post
   'POST /api/v1/posts': Post.createPost,
   'PUT /api/v1/posts/:id': Post.updatePost,
-  'DELETE /api/v1/posts/:id': Post.updatePost,
+  'DELETE /api/v1/posts/:id': Post.deletePost,
   'GET /api/v1/posts/:id': Post.getPost,
   'GET /api/v1/posts': Post.findPosts,
 

@@ -13,9 +13,11 @@ const updatePost = (req, res) => {
 };
 
 const deletePost = (req, res) => {
-  res.json({
-    status: 'ok',
-  });
+  // res.json({
+  //   status: 'failed',
+  //   message:'这是错误信息！'
+  // });
+  
 };
 
 const getPost = (req, res) => {

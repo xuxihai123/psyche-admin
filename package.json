@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "@types/lodash": "^4.14.123",
+    "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "dayjs": "^1.8.13",
     "ele-dialogsvc": "^0.0.1",
-    "fetch-axios": "^0.0.7",
     "mavon-editor": "^2.7.4",
     "mockjs": "^1.0.1-beta3",
     "normalize.css": "^8.0.1",

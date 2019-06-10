@@ -189,17 +189,12 @@ export default new Router({
       children: [
         {
           path: '',
-          redirect: '/login/step1',
+          redirect: '/login/index',
         },
         {
-          path: '/login/step1',
-          name: 'loginStep1',
-          component: () => import('@/views/login/step1.vue'),
-        },
-        {
-          path: '/login/step2',
-          name: 'loginStep2',
-          component: () => import('@/views/login/step2.vue'),
+          path: '/login/index',
+          name: 'loginIndex',
+          component: () => import('@/views/login/index.vue'),
         },
       ],
     },
