@@ -74,6 +74,7 @@ export default class PostUpdate extends Vue {
         tags: result.tags,
       };
     } catch (err) {
+      this.$message.error(err.message);
     } finally {
       this.loading = false;
     }
@@ -100,6 +101,7 @@ export default class PostUpdate extends Vue {
     } catch (err) {
       this.$message.error(err.message);
     } finally {
+      console.log('finished...');
     }
   }
   private showMoreSet(flag: boolean) {

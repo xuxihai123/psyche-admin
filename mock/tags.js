@@ -48,7 +48,7 @@ const findTags = (req, res) => {
         uuid: '@string("lower", 5)ee2-a758-48a1-880f-008bc76fdd3a',
         name: '@csentence(5,8)',
         slug: '@word(5, 10)',
-        description: '@word(20, 50)',
+        description: '@csentence(5,16)',
         parent_id: null,
         meta_title: '@word(5, 10)',
         meta_description: '@csentence(5,16)',

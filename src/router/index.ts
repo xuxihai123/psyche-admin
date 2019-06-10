@@ -118,69 +118,56 @@ const routes: any = [
     ]),
     component: () => import('@/views/page/list.vue'),
   },
-
-  {
-    path: '/system/bash',
-    name: 'systemBash',
-    meta: buildCrumb([
-      {
-        name: '系统',
-      },
-      {
-        name: '终端',
-      },
-    ]),
-    component: () => import('@/views/system/bash.vue'),
-  },
-  {
-    path: '/system/explorer',
-    name: 'systemExplorer',
-    meta: buildCrumb([
-      {
-        name: '系统',
-      },
-      {
-        name: '文件浏览',
-      },
-    ]),
-    component: () => import('@/views/system/explorer.vue'),
-  },
-  {
-    path: '/system/caidao',
-    name: 'systemCaidao',
-    meta: buildCrumb([
-      {
-        name: '系统',
-      },
-      {
-        name: '菜刀',
-      },
-    ]),
-    component: () => import('@/views/system/caidao/index.vue'),
-  },
   {
     path: '/setting/base',
     name: 'baseSetting',
+    meta: buildCrumb([
+      {
+        name: '设置',
+      },
+      {
+        name: '基本设置',
+      },
+    ]),
     component: () => import('@/views/setting/base.vue'),
-  },
-  {
-    path: '/setting/blog',
-    name: 'settingBlog',
-    component: () => import('@/views/setting/blog.vue'),
   },
   {
     path: '/setting/mail',
     name: 'settingMail',
+    meta: buildCrumb([
+      {
+        name: '设置',
+      },
+      {
+        name: '邮件设置',
+      },
+    ]),
     component: () => import('@/views/setting/mail.vue'),
   },
   {
     path: '/setting/navigation',
     name: 'settingNavigation',
+    meta: buildCrumb([
+      {
+        name: '设置',
+      },
+      {
+        name: '导航设置',
+      },
+    ]),
     component: () => import('@/views/navigation/index.vue'),
   },
   {
     path: '/setting/user',
     name: 'userManager',
+    meta: buildCrumb([
+      {
+        name: '设置',
+      },
+      {
+        name: '用户管理',
+      },
+    ]),
     component: () => import('@/views/user/index.vue'),
   },
 ];

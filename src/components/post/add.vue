@@ -54,6 +54,7 @@ export default class PostCreate extends Vue {
   private showSetting: boolean = false;
 
   private async publish(flag: boolean) {
+    const loading = this.$loading({text: 'loading...'});
     try {
       console.log('onSubmit...');
       const payload: any = {
@@ -74,6 +75,7 @@ export default class PostCreate extends Vue {
     } catch (err) {
       this.$message.error(err.message);
     } finally {
+      loading.close();
     }
   }
   private showMoreSet(flag: boolean) {

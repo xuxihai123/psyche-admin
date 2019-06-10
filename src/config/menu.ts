@@ -42,30 +42,6 @@ export default [
       },
     ],
   },
-  // {
-  //   title: '标签',
-  //   name: 'tagsManager',
-  //   icon: 'fa fa-tags fa-lg',
-  // },
-  {
-    title: '系统',
-    name: 'system',
-    icon: 'el-icon-s-platform',
-    children: [
-      {
-        title: '在线终端',
-        name: 'systemBash',
-      },
-      {
-        title: '文件浏览',
-        name: 'systemExplorer',
-      },
-      {
-        title: '中国菜刀',
-        name: 'systemCaidao',
-      },
-    ],
-  },
   {
     title: '设置',
     name: 'setting',
@@ -75,11 +51,10 @@ export default [
         title: '基本设置',
         name: 'baseSetting',
       },
-      {
-        title: '皮肤设置',
-        name: 'skinsSetting',
-      },
-
+      // {
+      //   title: '皮肤设置',
+      //   name: 'skinsSetting',
+      // },
       {
         title: '导航管理',
         name: 'settingNavigation',

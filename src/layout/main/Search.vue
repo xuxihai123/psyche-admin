@@ -1,5 +1,5 @@
 <template>
-  <div :class="{'show':show}" class="header-search" v-click-outside="clickOut">
+  <div :class="{'show':show}" class="header-search">
     <span class="search-icon">
       <i class="fa fa-search fa-lg" @click.stop="click"></i>
     </span>

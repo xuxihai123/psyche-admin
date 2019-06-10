@@ -80,7 +80,7 @@ import postSvc from '@/services/post';
 @Component
 export default class PostCreate extends BaseList {
   @Prop({default: 'post'})
-  private type!: string;
+  public type!: string;
 
   public tableData: any = [];
   public multipleSelection: any = [];
@@ -113,7 +113,16 @@ export default class PostCreate extends BaseList {
     window.open('http://localhost:3000/post?pid=' + item.id);
   }
 
-  public deleteItem(item: any) {}
+  public deleteItem(item: any) {
+    postSvc
+      .delete(item.id)
+      .then((result: any) => {
+        this.fetchList();
+      })
+      .catch((err) => {
+        this.$message.error(err.message);
+      });
+  }
 
   public toEdit(item: any) {
     const routerName = this.type === 'post' ? 'postsEdit' : 'pagesEdit';

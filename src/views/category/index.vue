@@ -26,7 +26,7 @@
         <el-table-column prop="description" label="描述"></el-table-column>
         <el-table-column label="标签列表">
           <template slot-scope="scope">
-            <span>{{scope.row.tags.map((tag)=>tag.name).join(', ')}}</span>
+            <span v-if="scope.row.tags">{{scope.row.tags.map((tag)=>tag.name).join(', ')}}</span>
           </template>
         </el-table-column>
         <el-table-column fixed="right" label="操作">

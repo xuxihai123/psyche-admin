@@ -21,12 +21,12 @@ const deletePost = (req, res) => {
 const getPost = (req, res) => {
   res.json({
     status: 'ok',
-    data: {
+    data: mockjs.mock({
       id: '@integer',
       uuid: '@string("lower", 5)ee2-a758-48a1-880f-008bc76fdd3a',
       title: '@csentence(5,8)',
       slug: '@word(5, 10)',
-      markdown: '@word(30, 300)',
+      markdown: '@csentence(5,300)',
       html: null,
       image: null,
       featured: 0,
@@ -42,7 +42,7 @@ const getPost = (req, res) => {
       updated_by: 1,
       published_at: '@datetime',
       published_by: null,
-    },
+    }),
   });
 };
 
@@ -56,7 +56,7 @@ const findPosts = (req, res) => {
         uuid: '@string("lower", 5)ee2-a758-48a1-880f-008bc76fdd3a',
         title: '@csentence(5,8)',
         slug: '@word(5, 10)',
-        markdown: '@word(30, 300)',
+        markdown: '@csentence(5,100)',
         html: null,
         image: null,
         featured: 0,

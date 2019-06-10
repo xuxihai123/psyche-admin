@@ -1,5 +1,5 @@
 <template>
-  <div class="more-setting" v-click-outside="closeModal">
+  <div class="more-setting">
     <el-form ref="form" :model="formData" label-position="top" label-width="80px">
       <h5 class="setting-title">发布设置</h5>
       <div class="image-setting">
@@ -118,6 +118,7 @@ export default class MoreSetting extends Vue {
   }
   private closeModal(event: any) {
     if (event.target && event.target.textContent === '更多设置') {
+      console.log('click 更多设置');
     } else {
       this.$emit('close');
     }

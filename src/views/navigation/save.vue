@@ -1,5 +1,5 @@
 <template>
-  <div class="more-setting" v-click-outside="closeModal">
+  <div class="more-setting">
     <el-form ref="form" :model="formData" :rules="rules" label-position="top" label-width="80px">
       <h5 class="setting-title">导航设置</h5>
       <el-form-item label="导航名称">
