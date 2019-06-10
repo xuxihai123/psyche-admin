@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router/index';
-import scope from './store/index';
+import store from './store/index';
 import './registerServiceWorker';
 import 'normalize.css/normalize.css';
 import vClickOutside from 'v-click-outside';
@@ -16,8 +16,7 @@ import './styles/index.scss';
 import './filters/index';
 
 import setupEnv from './services/setupEnv';
-
-Vue.prototype.$scope = scope;
+import VueGscope from 'vue-gscope';
 
 Vue.component('main-panel', MainPanel);
 Vue.use(vClickOutside);
@@ -27,13 +26,8 @@ Vue.use(Element, {
   size: 'small', // set element-ui default size
 });
 
-if (process.env.NODE_ENV === 'development') {
-  new Vue({
-    router,
-    render: (h) => h(App),
-  }).$mount('#app');
-} else {
-}
+Vue.use(VueGscope, store);
+
 
 setupEnv()
   .then(() => {

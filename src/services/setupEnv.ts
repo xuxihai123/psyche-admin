@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import UserSvc from '../services/user';
-import scope from '../store';
+import store from '../store';
 
 const isProd = process.env.NODE_ENV !== 'development';
 Vue.config.productionTip = false;
 
-const setupEnv = async function() {
+const setupEnv = async () => {
   let userinfo;
   if (isProd) {
     userinfo = await UserSvc.session();
@@ -22,8 +22,7 @@ const setupEnv = async function() {
       githubUrl: 'https://github.com/xuxihai123',
     };
   }
-  scope.user = userinfo;
-  console.log(scope);
+  store.user = userinfo;
 };
 
 export default setupEnv;

@@ -36,7 +36,14 @@
 <script lang="ts">
 import {Vue, Component, Prop} from 'vue-property-decorator';
 @Component
-export default class HomePage extends Vue {}
+export default class HomePage extends Vue {
+  private mounted() {
+    this.$scope.$on('test', (event: any) => {
+      console.log(1111);
+      console.log(event);
+    });
+  }
+}
 </script>
 
 <style lang="scss">
