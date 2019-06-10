@@ -2,7 +2,8 @@
   <div class="user-info">
     <el-dropdown @command="handleCommand">
       <span class="el-dropdown-link">
-        admin
+        <!-- {{$scope.user.name}} -->
+        <img :src="$scope.user.avatar" v-if="$scope.user">
         <i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -32,9 +33,18 @@ export default class UserInfo extends Vue {
 
 <style lang="scss">
 .user-info {
-  height: 20px;
-  line-height: 20px;
-  padding: 15px 0;
+  height: 50px;
+  line-height: 50px;
+  outline: none;
+  // padding: 15px 0;
+  img {
+    width: 32px;
+    height: 32px;
+    vertical-align: middle;
+    border: 1px solid lightblue;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }
 </style>
 
