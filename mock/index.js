@@ -4,11 +4,13 @@ import Post from './posts';
 import Navigation from './navigations';
 import Setting from './setting';
 import Category from './category';
+import File from './file';
 
 export default {
   'GET /api/v1/users': User.findAll,
   'POST /api/v1/login': User.login,
   'POST /api/v1/authtoken': User.login,
+  'POST /api/v1/upload/single': File.uploadSingleFile,
 
   // post
   'POST /api/v1/posts': Post.createPost,

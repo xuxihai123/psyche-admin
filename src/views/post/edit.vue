@@ -1,7 +1,7 @@
 <template>
-  <div class="post-container">
+  <main-panel class="post-container" title="编辑文章">
     <post-update-form></post-update-form>
-  </div>
+  </main-panel>
 </template>
 
 

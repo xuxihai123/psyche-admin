@@ -28,7 +28,6 @@ Vue.use(Element, {
 
 Vue.use(VueGscope, store);
 
-
 setupEnv()
   .then(() => {
     new Vue({

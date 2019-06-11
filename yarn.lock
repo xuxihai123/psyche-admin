@@ -6566,10 +6566,9 @@ vue-click-outside@^1.0.7:
   version "1.0.7"
   resolved "http://r.cnpmjs.org/vue-click-outside/download/vue-click-outside-1.0.7.tgz#cdd2b1605e3c4944784e1794eae4a12a0f700bd6"
 
-vue-gscope@^0.0.1:
-  version "0.0.1"
-  resolved "https://registry.npmjs.org/vue-gscope/-/vue-gscope-0.0.1.tgz#f9bbd7a87a5518121d50a7a54a642e20ec7c8595"
-  integrity sha512-mq6v5bJV55jLvsRdvcEjzU2Qwo6pZvtVYYc69vjDFeKcrEOQN3cCI1N5feylWEVjB10c93AokVPsTNOfcRoC0Q==
+vue-gscope@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/vue-gscope/-/vue-gscope-0.0.2.tgz#9904aed10d3d3df6cb69016d70a8e81588cdbeb7"
 
 vue-hot-reload-api@^2.3.0:
   version "2.3.3"

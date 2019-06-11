@@ -38,7 +38,7 @@
       <img :src="captchaUrl" class="captcha" @click="refreshToken">
     </el-form-item>
     <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
-    <el-form-item style="width:100%;">
+    <el-form-item class="btns">
       <el-button
         type="primary"
         style="width:100%;"
@@ -88,7 +88,9 @@ export default class LoginStep1 extends Vue {
     }
   }
   private refreshToken() {
-    this.captchaUrl = '/api/v1/captcha?time=' + Date.now();
+    // this.captchaUrl = '/api/v1/captcha?time=' + Date.now();
+    this.captchaUrl =
+      'https://cloud.githubusercontent.com/assets/5518/22151427/e4939d92-df58-11e6-9754-4a46a86acea8.gif';
   }
 }
 </script>
@@ -102,22 +104,26 @@ export default class LoginStep1 extends Vue {
   background-clip: padding-box;
   margin: 180px auto;
   width: 350px;
-  padding: 35px 35px 15px 35px;
+  padding: 0 35px;
   background: #fff;
   border: 1px solid #eaeaea;
   box-shadow: 0 0 25px #cac6c6;
   .title {
-    margin: 0px auto 40px auto;
+    margin: 30px auto;
     text-align: center;
     color: #505458;
   }
   .remember {
-    margin: 0px 0px 35px 0px;
+    margin: 0;
   }
   .captcha {
     height: 32px;
     vertical-align: middle;
     margin-left: 30px;
+  }
+  .btns {
+    width: 100%;
+    margin: 30px auto;
   }
 }
 </style>
