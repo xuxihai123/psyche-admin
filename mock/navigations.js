@@ -2,25 +2,25 @@ import mockjs from 'mockjs';
 
 const createNav = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const updateNav = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const deleteNav = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const getNav = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       id: '@integer',
       name: '导航标题',
@@ -33,7 +33,7 @@ const getNav = (req, res) => {
 
 const findNavs = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       items: [
         {

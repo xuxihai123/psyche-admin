@@ -1,6 +1,6 @@
 function getBaseSetting(req, res) {
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       blogUrl: 'http://localhost:3000',
       blogTitle: '断桥残雪',
@@ -14,12 +14,12 @@ function getBaseSetting(req, res) {
 }
 
 function updateBaseSetting(req, res) {
-  res.json({status: 'ok'});
+  res.json({code: '0000'});
 }
 
 function getEmailSetting(req, res) {
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       username: 'x373241884y@gmail.com',
       password: 'xxxxxxxx',
@@ -30,7 +30,7 @@ function getEmailSetting(req, res) {
 }
 
 function updateEmailSetting(req, res) {
-  res.json({status: 'ok'});
+  res.json({code: '0000'});
 }
 
 export default {

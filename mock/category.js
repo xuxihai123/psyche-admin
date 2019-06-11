@@ -17,7 +17,7 @@ const tagList = [
 ];
 const findAll = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       total: 55,
       items: [
@@ -98,19 +98,19 @@ const findAll = (req, res) => {
 
 const create = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const update = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const deleteItem = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 

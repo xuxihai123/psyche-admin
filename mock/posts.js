@@ -2,27 +2,26 @@ import mockjs from 'mockjs';
 
 const createPost = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const updatePost = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const deletePost = (req, res) => {
-  // res.json({
-  //   status: 'failed',
-  //   message:'这是错误信息！'
-  // });
-  
+  res.json({
+    code: '5000',
+    message: '这是错误信息！',
+  });
 };
 
 const getPost = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
     data: mockjs.mock({
       id: '@integer',
       uuid: '@string("lower", 5)ee2-a758-48a1-880f-008bc76fdd3a',
@@ -78,7 +77,7 @@ const findPosts = (req, res) => {
     ],
   });
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       items: mockData.list,
       total: 55,

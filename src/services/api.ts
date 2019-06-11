@@ -20,7 +20,7 @@ instance.interceptors.response.use(
       if (!/application\/json/.test(contentType)) {
         return;
       }
-      if (data && data.status !== 'ok') {
+      if (data && data.code !== '0000') {
         console.log(errorCodes.business[data.code] || data.message);
         throw new errors.BuessinessError(data.code, data.message);
       }
@@ -37,6 +37,7 @@ instance.interceptors.response.use(
   },
 );
 
+
 const api = ['get', 'post', 'put', 'delete'].reduce((prev: any, key: string) => {
   prev[key] = (url: string, options: any) => {
     options.method = key;
@@ -50,7 +51,7 @@ const api = ['get', 'post', 'put', 'delete'].reduce((prev: any, key: string) => 
     return (instance as any)(options).then((resp: AxiosResponse) => {
       console.log(`[axios]: ${resp.config.url} ${Date.now() - start}ms`);
       const respData = resp.data;
-      if (respData && respData.status === 'ok') {
+      if (respData && respData.code === '0000') {
         return respData.data || resp.data;
       } else {
         return resp.data;

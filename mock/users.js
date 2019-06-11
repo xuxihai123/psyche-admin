@@ -2,7 +2,7 @@ import mockjs from 'mockjs';
 
 const login = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
@@ -23,7 +23,7 @@ const findAll = (req, res) => {
     ],
   });
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       items: mockData.list,
       total: 55,

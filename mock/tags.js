@@ -2,25 +2,25 @@ import mockjs from 'mockjs';
 
 const createTag = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const updateTag = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const deleteTag = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
   });
 };
 
 const getTag = (req, res) => {
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       id: '@integer',
       uuid: '@string("lower", 5)ee2-a758-48a1-880f-008bc76fdd3a',
@@ -60,7 +60,7 @@ const findTags = (req, res) => {
     ],
   });
   res.json({
-    status: 'ok',
+    code: '0000',
     data: {
       items: mockData.list,
       total: 55,

@@ -6,6 +6,7 @@ import Setting from './setting';
 import Category from './category';
 import File from './file';
 
+
 export default {
   'GET /api/v1/users': User.findAll,
   'POST /api/v1/login': User.login,
