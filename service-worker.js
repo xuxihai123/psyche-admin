@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.2f6b137298f050ab716296a83e326af0.js"
+  "/psyche-admin/precache-manifest.6d3826c8f1d7db168b883664293703f4.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "psyche-admin"});
