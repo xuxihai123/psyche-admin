@@ -13,7 +13,7 @@
     "core-js": "^2.6.5",
     "dayjs": "^1.8.13",
     "ele-dialogsvc": "^0.0.1",
-    "mavon-editor": "^2.7.4",
+    "mavon-editor": "^2.8.2",
     "mockjs": "^1.0.1-beta3",
     "normalize.css": "^8.0.1",
     "register-service-worker": "^1.6.2",
